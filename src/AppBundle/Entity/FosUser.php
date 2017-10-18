@@ -98,6 +98,9 @@ class FosUser
      */
     private $roles;
 
+    public function __toString(){
+        return $this->username;
+    }
 
 
     /**
