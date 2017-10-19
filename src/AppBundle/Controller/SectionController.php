@@ -48,26 +48,12 @@ class SectionController extends Controller
             $em->persist($section);
             $em->flush();
 
-            return $this->redirectToRoute('admin_section_show', array('id' => $section->getId()));
+            return $this->redirectToRoute('admin_section_index', array('id' => $section->getId()));
         }
 
         return $this->render('section/new.html.twig', array(
             'section' => $section,
             'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Finds and displays a section entity.
-     *
-     * @Route("/{id}", name="admin_section_show")
-     * @Method("GET")
-     */
-    public function showAction(Section $section)
-    {
-
-        return $this->render('section/show.html.twig', array(
-            'section' => $section,
         ));
     }
 

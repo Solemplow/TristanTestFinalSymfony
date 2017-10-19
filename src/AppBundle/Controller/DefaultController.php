@@ -13,14 +13,32 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
         $em = $this->getDoctrine()->getManager();
-
         $articles = $em->getRepository('AppBundle:Article')->findAll();
-
-        // on appel la vue et on y affiche les news
-        return $this->render('default/index.html.twig', [
-            "articles"=>$articles
-        ]);
+        $sections = $em->getRepository('AppBundle:Section')->findAll();
+        return $this->render('default/index.html.twig', array(
+            'articles' => $articles,
+            'sections' => $sections
+        ));
+    }
+    /**
+     * @Route("/section/{id}", name="sections")
+     */
+    public function sectionAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $titre_section = $em->getRepository('AppBundle:Section')->find($id);
+        $repository = $em->getRepository('AppBundle:Article');
+        $articles = $repository->createQueryBuilder('a')
+            ->innerJoin('a.section', 'g')
+            ->where('g.id = :idactu')
+            ->setParameter('idactu', $id)
+            ->getQuery()->getResult();
+        $sections = $em->getRepository('AppBundle:Section')->findAll();
+        return $this->render('default/section.html.twig', array(
+            'titre' => $titre_section,
+            'articles' => $articles,
+            'sections' => $sections
+        ));
     }
 }
