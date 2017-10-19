@@ -16,10 +16,9 @@ class ArticleType extends AbstractType
     {
         $builder->add('thetitle')->add('thetext')->add('thedate')->add('fosUser')->add('section', EntityType::class, array(
             'class' => 'AppBundle:Section',
-
             'multiple' => 'true',
             'expanded' => 'true',
-            'label_attr' =>array(
+            'label_attr' => array(
                 'class' => 'checkbox-inline'
             )
         ));

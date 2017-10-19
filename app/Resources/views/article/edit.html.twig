@@ -14,8 +14,12 @@
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Delete" class="button button">
+            <input type="hidden" value="app.user.id" name="id">
             {{ form_end(delete_form) }}
         </li>
     </ul>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <p>Username: {{ app.user.id }}</p>
+    {% endif %}
 {% endblock %}
