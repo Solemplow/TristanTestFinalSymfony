@@ -2,7 +2,8 @@
 
 {% block body %}
     <h1>Sections list</h1>
-
+    <div class="row">
+    <div class="col-md-8">
     <table>
         <thead>
             <tr>
@@ -25,4 +26,14 @@
             <a href="{{ path('admin_section_new') }}">Create a new section</a>
         </li>
     </ul>
+    </div>
+    <div class="col-md-4">
+        <div class="panel-heading">Sections disponibles :</div>
+        {% for s in sections %}
+            <div class="panel panel-primary">
+                <li class="list-group-item list-group-item-success"><a href="{{ path("sections",{ 'id': s.id }) }}">{{ s.thetitle }}</a></li>
+            </div>
+        {% endfor %}
+    </div><hr/>
+    </div>
 {% endblock %}
